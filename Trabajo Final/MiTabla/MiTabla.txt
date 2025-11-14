@@ -1,0 +1,46 @@
+// Enum para filtrar gastos según el método de pago utilizado.
+Enum metodos {
+  EFECTIVO
+  TRANSFERENCIA
+  TARJETA
+  YAPE
+  PLIN
+  CRIPTOMONEDA
+  OTROS
+}
+
+// Enum para clasificar los gastos por tipo o categoría.
+Enum tipos {
+  SERVICIOS        // Pagos de luz, agua, internet, etc.
+  COMPRA_INSUMOS   // Materiales, productos para reventa
+  MANTENIMIENTO    // Reparaciones, limpieza, infraestructura
+  SUELDOS          // Pago a empleados
+  PUBLICIDAD       // Marketing, anuncios, flyers
+  TRANSPORTE       // Movilidad, envíos
+  OTROS            // Otros gastos no clasificados
+}
+
+// Tabla de usuarios del sistema.
+// Se utiliza para identificar quién registró o autorizó cada gasto.
+Table usuarios {
+  id_usuario INT [pk, increment]
+  nombre_usuario VARCHAR(150)
+}
+
+/*
+  La tabla gastos almacena todas las salidas de dinero realizadas en el sistema.
+  Registra la descripción, el monto, el tipo de gasto, el método de pago y el
+  usuario que lo registró. También permite conocer cuándo fue creado o actualizado,
+  y se puede activar/desactivar mediante el campo estado.
+*/
+Table gastos {
+  id_gasto INT [pk, increment]
+  descripcion VARCHAR(255)
+  monto DECIMAL(10,2) [not null]
+  tipo_gasto tipos
+  metodo_pago metodos [default: 'EFECTIVO']
+  fecha_creacion DATETIME [default: `CURRENT_TIMESTAMP`]
+  fecha_actualizacion DATETIME [default: `CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`]
+  usuario INT [not null, ref: > usuarios.id_usuario]
+  estado BOOLEAN [default: TRUE]
+}

@@ -1,0 +1,18 @@
+CREATE TABLE `usuarios` (
+  `id_usuario` INT PRIMARY KEY AUTO_INCREMENT,
+  `nombre_usuario` VARCHAR(150)
+);
+
+CREATE TABLE `gastos` (
+  `id_gasto` INT PRIMARY KEY AUTO_INCREMENT,
+  `descripcion` VARCHAR(255),
+  `monto` DECIMAL(10,2) NOT NULL,
+  `tipo_gasto` ENUM ('SERVICIOS', 'COMPRA_INSUMOS', 'MANTENIMIENTO', 'SUELDOS', 'PUBLICIDAD', 'TRANSPORTE', 'OTROS'),
+  `metodo_pago` ENUM ('EFECTIVO', 'TRANSFERENCIA', 'TARJETA', 'YAPE', 'PLIN', 'CRIPTOMONEDA', 'OTROS') DEFAULT 'EFECTIVO',
+  `fecha_creacion` DATETIME DEFAULT (CURRENT_TIMESTAMP),
+  `fecha_actualizacion` DATETIME DEFAULT (CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP),
+  `usuario` INT NOT NULL,
+  `estado` BOOLEAN DEFAULT true
+);
+
+ALTER TABLE `gastos` ADD FOREIGN KEY (`usuario`) REFERENCES `usuarios` (`id_usuario`);

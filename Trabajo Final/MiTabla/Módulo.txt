@@ -1,0 +1,10 @@
+==========================================
+MÓDULO: Gestión de gastos
+BASE DE DATOS: Sistema de Ventas e Inventario
+AUTOR: Juan Piero Vincha Loza
+FECHA: 26/10/2025
+==========================================
+
+Descripción:
+
+El módulo de Gestión de Gastos permite registrar, controlar y consultar todos los gastos operativos o compras menores realizados dentro del sistema. Su objetivo principal es mantener un control claro de las salidas de dinero y relacionarlas con el usuario que las registra y la caja correspondiente.
